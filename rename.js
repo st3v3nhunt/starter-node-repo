@@ -3,9 +3,7 @@
 const fs = require('fs')
 const readline = require('readline')
 
-const originalDescription = 'description-of-project-goes-here'
-const originalNamespace = 'ffc-demo'
-const originalProjectName = 'starter-node-repo'
+const { description: originalDescription, name: originalProjectName } = require('./package.json')
 
 function processInput (args) {
   const [, , projectName, description] = args
@@ -42,8 +40,10 @@ function getScriptDir () {
   return './scripts'
 }
 
+// Not all of these files are in the repo, the rename will ignore the error if
+// any are missing and these might be useful to add at some point
 function getRootFiles () {
-  return ['docker-compose.yaml', 'docker-compose.override.yaml', 'docker-compose.test.yaml', 'docker-compose.test.watch.yaml', 'package.json', 'package-lock.json']
+  return ['docker-compose.yaml', 'package.json', 'package-lock.json']
 }
 
 function getScriptFiles () {
@@ -54,17 +54,10 @@ function getScriptFiles () {
   })
 }
 
-function getNamespace (projectName) {
-  const firstIndex = projectName.indexOf('-')
-  const secondIndex = projectName.indexOf('-', firstIndex + 1)
-  return projectName.substring(0, secondIndex)
-}
-
 async function updateProjectName (projectName) {
   const rootFiles = getRootFiles()
   const scriptFiles = getScriptFiles()
   const filesToUpdate = [...rootFiles, ...scriptFiles]
-  const namespace = getNamespace(projectName)
 
   console.log(`Updating projectName from '${originalProjectName}', to '${projectName}'. In...`)
   await Promise.all(filesToUpdate.map(async (file) => {
@@ -72,8 +65,7 @@ async function updateProjectName (projectName) {
     try {
       const content = await fs.promises.readFile(file, 'utf8')
       const projectNameRegex = new RegExp(originalProjectName, 'g')
-      const namespaceRegex = new RegExp(originalNamespace, 'g')
-      const updatedContent = content.replace(projectNameRegex, projectName).replace(namespaceRegex, namespace)
+      const updatedContent = content.replace(projectNameRegex, projectName)
       return fs.promises.writeFile(file, updatedContent)
     } catch (err) {
       console.error(err)
@@ -99,8 +91,13 @@ async function rename () {
   const { description, projectName } = processInput(process.argv)
   const rename = await confirmRename(projectName, description)
   if (rename) {
-    await updateProjectName(projectName)
-    await updateProjectDescription(description)
+    console.time('rename')
+    Promise
+      .allSettled([
+        updateProjectName(projectName),
+        updateProjectDescription(description)
+      ])
+      .then(() => console.timeEnd('rename'))
   } else {
     console.log('Project has not been renamed.')
   }
