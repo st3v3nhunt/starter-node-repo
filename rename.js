@@ -10,13 +10,13 @@ const originalProjectName = 'starter-node-repo'
 function processInput (args) {
   const [, , projectName, description] = args
   if (args.length === 2) {
-    console.error('Please enter a new name and description for the project e.g. my-new-repo "CLI for saving me time".')
+    console.error('Please enter a new name and description for the project e.g. my-new-repo "Really useful description".')
     process.exit(1)
   }
   if (args.length !== 4 || !projectName || !description) {
     const errMsg = [
       'Please enter a new name and description for the project.',
-      'The description must not be empty and be wrapped in quotation marks e.g. "best description ever".'
+      'The description must not be empty and be wrapped in quotation marks e.g. "Really useful description".'
     ]
     console.error(errMsg.join('\n'))
     process.exit(1)
