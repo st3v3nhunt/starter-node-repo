@@ -36,28 +36,15 @@ async function confirmRename (projectName, description) {
   })
 }
 
-function getScriptDir () {
-  return './scripts'
-}
-
 // Not all of these files are in the repo, the rename will ignore the error if
 // any are missing and these might be useful to add at some point
 function getRootFiles () {
-  return ['docker-compose.yaml', 'package.json', 'package-lock.json']
-}
-
-function getScriptFiles () {
-  const scriptDir = getScriptDir()
-  const files = ['test']
-  return files.map((file) => {
-    return `${scriptDir}/${file}`
-  })
+  return ['docker-compose.yaml', 'docker-compose.yaml', 'package.json', 'package-lock.json', 'README.md']
 }
 
 async function updateProjectName (projectName) {
   const rootFiles = getRootFiles()
-  const scriptFiles = getScriptFiles()
-  const filesToUpdate = [...rootFiles, ...scriptFiles]
+  const filesToUpdate = [...rootFiles]
 
   console.log(`Updating projectName from '${originalProjectName}', to '${projectName}'. In...`)
   await Promise.all(filesToUpdate.map(async (file) => {
