@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  starter-node-repo:
+    build:
+      context: .
+    image: starter-node-repo
+    container_name: starter-node-repo
+    environment: {}
