@@ -2,11 +2,11 @@
   "name": "starter-node-repo",
   "version": "1.0.0",
   "description": "A bare bones repo with useful some basics added",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
     "lint": "standard",
-    "start": "node app.js",
-    "start:watch": "nodemon app.js",
+    "start": "node src/app.js",
+    "start:watch": "nodemon src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "st3v3nhunt",
