@@ -28,7 +28,7 @@ async function confirmRename (projectName, description) {
     input: process.stdin,
     output: process.stdout
   })
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, _) => {
     rl.question(`Do you want to rename the project to '${projectName}', with a description of '${description}'?\nType '${affirmativeAnswer}' to confirm\n`, (answer) => {
       rl.close()
       resolve(answer === affirmativeAnswer)

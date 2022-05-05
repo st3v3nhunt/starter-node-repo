@@ -3,8 +3,8 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Known Vulnerabilities](https://snyk.io/test/github/st3v3nhunt/starter-node-repo/badge.svg)](https://snyk.io/test/github/st3v3nhunt/starter-node-repo)
 
-> A blank repo with some useful modules installed to save time when starting a
-> new project
+> A blank, containerised repo with some useful modules installed to save time
+> when starting a new project
 
 ## Usage
 
@@ -22,7 +22,7 @@ If there is an issue during the rename the changes can be reverted via
 
 ## Running the application
 
-The application is Dockerised and can be run via `docker` or `docker compose`
+The application is Dockerised and can be run via `docker` or `docker-compose`
 commands. The easiest option is to use the `docker-compose` files and run the
 application via `docker-compose up --build`. Alternatively, the same can be
 achieved by building the image and running it with docker:
@@ -32,3 +32,6 @@ docker build . --build-arg NODE_ENV=development -t starter-node-repo
 
 docker run --init -p 3000:3000 -p 9229:9229 -t starter-node-repo
 ```
+
+There is convenience script including the commands to start the application -
+[scripts/start](./scripts/start).
