@@ -1,4 +1,4 @@
-FROM node:14.16-alpine3.10
+FROM node:18.1.0-alpine3.14
 
 # Default env to production
 ARG NODE_ENV=production
@@ -10,13 +10,13 @@ ENV PORT=$PORT
 
 EXPOSE $PORT $PORT_DEBUG
 
-# Run as non-root user
-USER node
-
 WORKDIR /home/node/app
 
 COPY --chown=node:node package*.json ./
 RUN npm install
 COPY --chown=node:node . .
+
+# Run as non-root user
+USER node
 
 CMD [ "npm", "run", "start:watch" ]
