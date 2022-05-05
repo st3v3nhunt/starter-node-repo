@@ -4,15 +4,15 @@
   "description": "A bare bones repo with useful some basics added",
   "main": "src/app.js",
   "scripts": {
-    "lint": "standard",
     "start": "node src/app.js",
     "start:watch": "nodemon src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:lint": "standard"
   },
   "author": "st3v3nhunt",
   "license": "MIT",
   "devDependencies": {
     "nodemon": "^2.0.7",
-    "standard": "^16.0.3"
+    "standard": "^17.0.0"
   }
 }
