@@ -22,16 +22,15 @@ If there is an issue during the rename the changes can be reverted via
 
 ## Running the application
 
-The application is Dockerised and can be run via `docker` or `docker-compose`
-commands. The easiest option is to use the `docker-compose` files and run the
-application via `docker-compose up --build`. Alternatively, the same can be
-achieved by building the image and running it with docker:
+The application is containerised for Docker and can be run via `docker` or
+`docker-compose` commands. The easiest option is to use the convenience script
+([scripts/start](./scripts/start)) which includes the commands to start the
+application via `docker-compose`.
+
+The commands to run the application with just docker are:
 
 ```shell
-docker build . --build-arg NODE_ENV=development -t starter-node-repo
+docker build . --build-arg NODE_ENV=development -t beer-quest
 
-docker run --init -p 3000:3000 -p 9229:9229 -t starter-node-repo
+docker run --init -p 3000:3000 -p 9229:9229 -t beer-quest
 ```
-
-There is convenience script including the commands to start the application -
-[scripts/start](./scripts/start).
