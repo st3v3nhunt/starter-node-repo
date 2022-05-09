@@ -34,3 +34,15 @@ docker build . --build-arg NODE_ENV=development -t beer-quest
 
 docker run --init -p 3000:3000 -p 9229:9229 -t beer-quest
 ```
+
+## Testing the application
+
+Tests for the application can be run in one of two modes via the convenience
+script ([scripts/test](./scripts/test)).
+
+In order to run the tests once, simply run the script with no options i.e.
+`./scripts/test`.
+
+The tests can also be run in watch mode by passing `-w` to the script
+`./scripts/test -w`. This will continually run the tests when file changes are
+detected and is a good option to use whilst developing the application.
