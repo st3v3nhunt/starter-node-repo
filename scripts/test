@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+
+set -e # set errexit
+
+project="starter-node-repo"
+
+if [ "$1" = "-w" ]; then
+  watch=true
+fi
+
+compose() {
+  if [ $watch ]; then
+    echo "WATCH mode running"
+    docker-compose -f docker-compose.yaml -f docker-compose.test.yaml -f docker-compose.test.watch.yaml -p "${project}-test" "$@"
+  else
+    docker-compose -f docker-compose.yaml -f docker-compose.test.yaml -p "${project}-test" "$@"
+  fi
+}
+
+(
+  # Guarantee clean environment
+  compose down -v
+
+  # Ensure container images are up to date
+  compose build
+
+  # Run tests
+  compose run ${project}
+
+  # Clean up
+  compose down -v
+)

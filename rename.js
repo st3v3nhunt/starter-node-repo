@@ -39,7 +39,7 @@ async function confirmRename (projectName, description) {
 // Not all of these files are in the repo, the rename will ignore the error if
 // any are missing and these might be useful to add at some point
 function getRootFiles () {
-  return ['docker-compose.yaml', 'docker-compose.override.yaml', 'package.json', 'package-lock.json', 'README.md']
+  return ['docker-compose.yaml', 'docker-compose.override.yaml', 'package.json', 'package-lock.json', 'README.md', './scripts/test']
 }
 
 async function updateProjectName (projectName) {
