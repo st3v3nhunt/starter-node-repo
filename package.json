@@ -6,13 +6,19 @@
   "scripts": {
     "start": "node src/app.js",
     "start:watch": "nodemon src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "test:lint": "standard"
+    "test": "jest",
+    "test:lint": "standard",
+    "test:watch": "jest --watchAll"
   },
   "author": "st3v3nhunt",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^27.5.0",
+    "jest": "^28.1.0",
     "nodemon": "^2.0.7",
     "standard": "^17.0.0"
+  },
+  "standard": {
+    "env": [ "jest"]
   }
 }
